@@ -5,11 +5,40 @@
 
 #include <SoapySDR/Logger.hpp>
 
-// Redirect SoapySDR's logging into SatDump's infrastructure.
 static void satdump_loghandler(const SoapySDR::LogLevel level, const char* message)
 {
-    (void)level;
-    (void)message;
+    auto spdlog_level = spdlog::level::info;
+
+    switch(level)
+    {
+    case SOAPY_SDR_FATAL:
+    case SOAPY_SDR_CRITICAL:
+        spdlog_level = spdlog::level::critical;
+        break;
+
+    case SOAPY_SDR_ERROR:
+        spdlog_level = spdlog::level::err;
+        break;
+
+    case SOAPY_SDR_WARNING:
+        spdlog_level = spdlog::level::warn;
+        break;
+
+    case SOAPY_SDR_NOTICE:
+    case SOAPY_SDR_INFO:
+        spdlog_level = spdlog::level::info;
+        break;
+
+    case SOAPY_SDR_DEBUG:
+        spdlog_level = spdlog::level::debug;
+        break;
+
+    default:
+        spdlog_level = spdlog::level::trace;
+        break;
+    }
+
+    logger->log(spdlog_level, "SoapySDR: {}", message);
 }
 
 class SoapySdrSDRSupport : public satdump::Plugin
@@ -25,7 +54,10 @@ public:
         satdump::eventBus->register_handler<dsp::RegisterDSPSampleSourcesEvent>(registerSources);
         satdump::eventBus->register_handler<dsp::RegisterDSPSampleSinksEvent>(registerSinks);
 
+        // Redirect SoapySDR's logging into SatDump's infrastructure. Pass all messages through
+        // and let SatDump decide what goes through.
         SoapySDR::registerLogHandler(satdump_loghandler);
+        SoapySDR::setLogLevel(SOAPY_SDR_SSI);
     }
 
     static void registerSources(const dsp::RegisterDSPSampleSourcesEvent &evt)
