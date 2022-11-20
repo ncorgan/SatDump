@@ -8,6 +8,7 @@
 #include <iterator>
 #include <stdexcept>
 
+// TODO: make device in start(), not here
 SoapySdrBase::SoapySdrBase(const std::string &args, const int direction):
     device(SoapySDR::Device::make(args)),
     direction(direction)
@@ -18,6 +19,7 @@ SoapySdrBase::SoapySdrBase(const std::string &args, const int direction):
 
 SoapySdrBase::~SoapySdrBase()
 {
+    // TODO: unmake device in stop() as well
     if(device) SoapySDR::Device::unmake(device);
 }
 
@@ -60,6 +62,7 @@ nlohmann::json SoapySdrBase::get_and_convert_settings() const
     return json_settings;
 }
 
+// TODO: use settings for device args, create if needed
 void SoapySdrBase::convert_and_set_settings(const nlohmann::json &settings)
 {
     const auto setting_infos = device->getSettingInfo();
