@@ -3,6 +3,7 @@ project(usrp_sdr_support)
 
 set(SATDUMP_ROOT "/usr")
 
+# TODO: figure out min UHD version based on logging, etc
 find_package(UHD)
 
 if(UHD_FOUND)
