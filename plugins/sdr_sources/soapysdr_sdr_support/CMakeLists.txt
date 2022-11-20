@@ -12,7 +12,7 @@ if(SoapySDR_FOUND)
 
     target_link_libraries(soapysdr_sdr_support SoapySDR)
 
-    target_include_directories(soapysdr_sdr_support PUBLIC src ${SATDUMP_ROOT}/include/satdump)
+    target_include_directories(soapysdr_sdr_support PUBLIC ${SATDUMP_ROOT}/include/satdump)
 
     install(TARGETS soapysdr_sdr_support DESTINATION share/satdump/plugins)
 else()
