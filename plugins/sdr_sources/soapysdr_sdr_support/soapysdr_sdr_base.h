@@ -26,6 +26,7 @@ protected:
     template <typename T>
     static std::vector<T> getAvailableDevices()
     {
+        // TODO: replace KwargsToString to look more like uhd::device_addr_t::to_pp_string
         std::vector<T> results;
         for(const auto &device: SoapySDR::Device::enumerate())
         {
