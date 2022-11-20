@@ -5,6 +5,9 @@
 #include <SoapySDR/Device.hpp>
 #include <SoapySDR/Types.hpp>
 
+#include <functional>
+#include <vector>
+
 class SoapySdrBase
 {
 protected:
@@ -19,4 +22,20 @@ protected:
     nlohmann::json get_and_convert_settings() const;
 
     void convert_and_set_settings(const nlohmann::json &settings);
+
+    template <typename T>
+    static std::vector<T> getAvailableDevices()
+    {
+        std::vector<T> results;
+        for(const auto &device: SoapySDR::Device::enumerate())
+        {
+            results.emplace_back(T{
+                "soapysdr",
+                SoapySDR::KwargsToString(device),
+                std::hash<std::string>()(SoapySDR::KwargsToString(device))
+            });
+        }
+
+        return results;
+    }
 };

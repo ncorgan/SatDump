@@ -37,21 +37,23 @@ void SoapySdrSink::close()
 {
 }
 
-void SoapySdrSink::set_frequency(uint64_t frequency)
-{
-    (void)frequency;
-}
-
 void SoapySdrSink::drawControlUI()
 {
 }
 
-void SoapySdrSink::set_samplerate(uint64_t samplerate)
+void SoapySdrSink::set_frequency(uint64_t frequency)
 {
-    (void)samplerate;
+    device->setFrequency(direction, channel, double(frequency));
+
+    d_frequency = uint64_t(device->getFrequency(direction, channel));
 }
 
-uint64_t get_samplerate()
+void SoapySdrSink::set_samplerate(uint64_t samplerate)
 {
-    return 0;
+    device->setSampleRate(direction, channel, double(samplerate));
+}
+
+uint64_t SoapySdrSink::get_samplerate()
+{
+    return uint64_t(device->getSampleRate(direction, channel));
 }

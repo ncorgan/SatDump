@@ -38,26 +38,23 @@ void SoapySdrSource::close()
 {
 }
 
-void SoapySdrSource::set_frequency(uint64_t frequency)
-{
-    (void)frequency;
-}
-
 void SoapySdrSource::drawControlUI()
 {
 }
 
+void SoapySdrSource::set_frequency(uint64_t frequency)
+{
+    device->setFrequency(direction, channel, double(frequency));
+
+    d_frequency = uint64_t(device->getFrequency(direction, channel));
+}
+
 void SoapySdrSource::set_samplerate(uint64_t samplerate)
 {
-    (void)samplerate;
+    device->setSampleRate(direction, channel, double(samplerate));
 }
 
 uint64_t SoapySdrSource::get_samplerate()
 {
-    return {};
-}
-
-std::vector<dsp::SourceDescriptor> SoapySdrSource::getAvailableSources()
-{
-    return {};
+    return uint64_t(device->getSampleRate(direction, channel));
 }

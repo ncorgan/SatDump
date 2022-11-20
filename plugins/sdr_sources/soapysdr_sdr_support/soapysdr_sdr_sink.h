@@ -20,14 +20,18 @@ public:
     void stop() override;
     void close() override;
 
-    void set_frequency(uint64_t frequency) override;
-
     void drawControlUI() override;
+
+    void set_frequency(uint64_t frequency) override;
 
     void set_samplerate(uint64_t samplerate) override;
     uint64_t get_samplerate() override;
 
     static std::string getID() { return "soapysdr"; }
     static std::shared_ptr<dsp::DSPSampleSink> getInstance(dsp::SinkDescriptor sink) { return std::make_shared<SoapySdrSink>(sink); }
-    static std::vector<dsp::SinkDescriptor> getAvailableSinks();
+
+    static inline std::vector<dsp::SinkDescriptor> getAvailableSinks()
+    {
+        return SoapySdrBase::getAvailableDevices<dsp::SinkDescriptor>();
+    }
 };
