@@ -8,6 +8,8 @@ class SoapySdrSource : public dsp::DSPSampleSource, public SoapySdrBase
 {
 public:
     SoapySdrSource(dsp::SourceDescriptor source);
+
+    // TODO: with parent's non-virtual dtor, figure out how this works
     virtual ~SoapySdrSource();
 
     void set_settings(nlohmann::json settings);

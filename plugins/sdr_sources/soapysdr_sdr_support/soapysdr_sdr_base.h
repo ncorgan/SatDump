@@ -8,10 +8,13 @@
 class SoapySdrBase
 {
 protected:
-    SoapySdrBase(const std::string &args);
+    SoapySdrBase(const std::string &args, const int direction);
     virtual ~SoapySdrBase();
 
+    // TODO: channel?
     SoapySDR::Device *device = nullptr;
+    const int direction = -1;
+    size_t channel = 0;
 
     nlohmann::json get_and_convert_settings() const;
 

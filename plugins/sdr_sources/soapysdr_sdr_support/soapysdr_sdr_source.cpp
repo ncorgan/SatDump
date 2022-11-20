@@ -2,7 +2,7 @@
 
 SoapySdrSource::SoapySdrSource(dsp::SourceDescriptor source) :
     DSPSampleSource(source),
-    SoapySdrBase(source.name)
+    SoapySdrBase(source.name, SOAPY_SDR_RX)
 {
 }
 

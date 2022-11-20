@@ -8,6 +8,8 @@ class SoapySdrSink : public dsp::DSPSampleSink, public SoapySdrBase
 {
 public:
     SoapySdrSink(dsp::SinkDescriptor sink);
+
+    // TODO: with parent's non-virtual dtor, figure out how this works
     virtual ~SoapySdrSink();
 
     void set_settings(nlohmann::json settings) override;

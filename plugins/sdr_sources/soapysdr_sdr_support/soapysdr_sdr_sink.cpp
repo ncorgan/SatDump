@@ -2,7 +2,7 @@
 
 SoapySdrSink::SoapySdrSink(dsp::SinkDescriptor sink) :
     DSPSampleSink(sink),
-    SoapySdrBase(sink.name)
+    SoapySdrBase(sink.name, SOAPY_SDR_TX)
 {
 }
 
