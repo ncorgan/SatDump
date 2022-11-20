@@ -1,8 +1,10 @@
 #pragma once
 
+#include "usrp_sdr_base.h"
+
 #include "common/dsp_source_sink/dsp_sample_source.h"
 
-class UsrpSource : public dsp::DSPSampleSource
+class UsrpSource : public dsp::DSPSampleSource, public UsrpBase
 {
 public:
     UsrpSource(dsp::SourceDescriptor source);
@@ -25,5 +27,9 @@ public:
 
     static std::string getID() { return "usrp"; }
     static std::shared_ptr<dsp::DSPSampleSource> getInstance(dsp::SourceDescriptor source) { return std::make_shared<UsrpSource>(source); }
-    static std::vector<dsp::SourceDescriptor> getAvailableSources();
+
+    static inline std::vector<dsp::SourceDescriptor> getAvailableSources()
+    {
+        return UsrpBase::getAvailableDevices<dsp::SourceDescriptor>();
+    }
 };

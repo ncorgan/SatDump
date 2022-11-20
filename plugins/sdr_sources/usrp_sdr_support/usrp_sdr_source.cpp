@@ -1,6 +1,8 @@
 #include "usrp_sdr_source.h"
 
-UsrpSource::UsrpSource(dsp::SourceDescriptor source) : DSPSampleSource(source)
+UsrpSource::UsrpSource(dsp::SourceDescriptor source) :
+    DSPSampleSource(source),
+    UsrpBase(source.name)
 {
 }
 
@@ -51,11 +53,6 @@ void UsrpSource::set_samplerate(uint64_t samplerate)
 }
 
 uint64_t UsrpSource::get_samplerate()
-{
-    return {};
-}
-
-std::vector<dsp::SourceDescriptor> UsrpSource::getAvailableSources()
 {
     return {};
 }

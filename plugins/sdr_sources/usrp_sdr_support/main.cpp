@@ -37,7 +37,7 @@ static void satdump_log(const uhd::log::logging_info &info)
     default: break;
     }
 
-    logger->log(spdlog_level, message);
+    logger->log(spdlog_level, "UHD: {}", message);
 }
 
 class UsrpSDRSupport : public satdump::Plugin

@@ -1,8 +1,10 @@
 #pragma once
 
+#include "usrp_sdr_base.h"
+
 #include "common/dsp_source_sink/dsp_sample_sink.h"
 
-class UsrpSink : public dsp::DSPSampleSink
+class UsrpSink : public dsp::DSPSampleSink, public UsrpBase
 {
 public:
     UsrpSink(dsp::SinkDescriptor sink);
@@ -25,5 +27,9 @@ public:
 
     static std::string getID() { return "usrp"; }
     static std::shared_ptr<dsp::DSPSampleSink> getInstance(dsp::SinkDescriptor sink) { return std::make_shared<UsrpSink>(sink); }
-    static std::vector<dsp::SinkDescriptor> getAvailableSinks();
+
+    static inline std::vector<dsp::SinkDescriptor> getAvailableSinks()
+    {
+        return UsrpBase::getAvailableDevices<dsp::SinkDescriptor>();
+    }
 };

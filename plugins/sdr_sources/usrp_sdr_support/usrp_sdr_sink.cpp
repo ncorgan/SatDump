@@ -1,6 +1,8 @@
 #include "usrp_sdr_sink.h"
 
-UsrpSink::UsrpSink(dsp::SinkDescriptor sink) : DSPSampleSink(sink)
+UsrpSink::UsrpSink(dsp::SinkDescriptor sink) :
+    DSPSampleSink(sink),
+    UsrpBase(sink.name)
 {
 }
 
@@ -49,7 +51,7 @@ void UsrpSink::set_samplerate(uint64_t samplerate)
     (void)samplerate;
 }
 
-uint64_t get_samplerate()
+uint64_t UsrpSink::get_samplerate()
 {
     return 0;
 }
