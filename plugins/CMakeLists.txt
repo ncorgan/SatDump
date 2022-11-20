@@ -207,3 +207,9 @@ option(PLUGIN_SDDC_SDR_SUPPORT "Enable SDDC (RX666, RX888, etc) SDR Support plug
 if(PLUGIN_SDDC_SDR_SUPPORT)
     add_subdirectory(sdr_sources/sddc_sdr_support)
 endif()
+
+option(PLUGIN_USRP_SUPPORT "Enable USRP Support plugin" ON)
+
+if(PLUGIN_USRP_SUPPORT)
+    add_subdirectory(sdr_sources/usrp_sdr_support)
+endif()
