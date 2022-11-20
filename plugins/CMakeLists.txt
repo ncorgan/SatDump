@@ -207,3 +207,9 @@ option(PLUGIN_SDDC_SDR_SUPPORT "Enable SDDC (RX666, RX888, etc) SDR Support plug
 if(PLUGIN_SDDC_SDR_SUPPORT)
     add_subdirectory(sdr_sources/sddc_sdr_support)
 endif()
+
+option(PLUGIN_SOAPYSDR_SUPPORT "Enable SoapySDR Support plugin" ON)
+
+if(PLUGIN_SOAPYSDR_SUPPORT)
+    add_subdirectory(sdr_sources/soapysdr_sdr_support)
+endif()
