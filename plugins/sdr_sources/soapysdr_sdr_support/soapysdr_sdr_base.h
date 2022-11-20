@@ -3,6 +3,7 @@
 #include <nlohmann/json.hpp>
 
 #include <SoapySDR/Device.hpp>
+#include <SoapySDR/Formats.h>
 #include <SoapySDR/Types.hpp>
 
 #include <functional>
@@ -14,10 +15,14 @@ protected:
     SoapySdrBase(const std::string &args, const int direction);
     virtual ~SoapySdrBase();
 
-    // TODO: channel?
-    SoapySDR::Device *device = nullptr;
-    const int direction = -1;
-    size_t channel = 0;
+    SoapySDR::Device *device{nullptr};
+    SoapySDR::Stream *stream{nullptr};
+
+    const int direction{-1};
+    size_t channel{0};
+    std::string format{SOAPY_SDR_CF32};
+    SoapySDR::Kwargs tune_args;
+    size_t mtu{0};
 
     nlohmann::json get_and_convert_settings() const;
 

@@ -10,9 +10,15 @@ if(SoapySDR_FOUND)
     file(GLOB_RECURSE soapysdr_sdr_support_CPPS *.cpp)
     add_library(soapysdr_sdr_support SHARED ${soapysdr_sdr_support_CPPS})
 
-    target_link_libraries(soapysdr_sdr_support SoapySDR)
+    # TODO: recreate SatDump's per-platform links
+    target_link_libraries(soapysdr_sdr_support
+        SoapySDR
+        volk)
 
-    target_include_directories(soapysdr_sdr_support PUBLIC ${SATDUMP_ROOT}/include/satdump)
+    # TODO: recreate SatDump's per-platform includes
+    target_include_directories(soapysdr_sdr_support PUBLIC
+        ${SATDUMP_ROOT}/include/satdump
+        ${volk_INCLUDE_DIRS})
 
     install(TARGETS soapysdr_sdr_support DESTINATION share/satdump/plugins)
 else()
