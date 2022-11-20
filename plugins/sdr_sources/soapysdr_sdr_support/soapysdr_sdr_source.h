@@ -1,8 +1,10 @@
 #pragma once
 
+#include "soapysdr_sdr_base.h"
+
 #include "common/dsp_source_sink/dsp_sample_source.h"
 
-class SoapySdrSource : public dsp::DSPSampleSource
+class SoapySdrSource : public dsp::DSPSampleSource, public SoapySdrBase
 {
 public:
     SoapySdrSource(dsp::SourceDescriptor source);

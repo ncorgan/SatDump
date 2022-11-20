@@ -5,7 +5,7 @@
 
 #include <SoapySDR/Logger.hpp>
 
-static void satdump_loghandler(const SoapySDR::LogLevel level, const char* message)
+static void satdump_loghandler(const SoapySDR::LogLevel level, const char *message)
 {
     auto spdlog_level = spdlog::level::info;
 

@@ -1,6 +1,8 @@
 #include "soapysdr_sdr_sink.h"
 
-SoapySdrSink::SoapySdrSink(dsp::SinkDescriptor sink) : DSPSampleSink(sink)
+SoapySdrSink::SoapySdrSink(dsp::SinkDescriptor sink) :
+    DSPSampleSink(sink),
+    SoapySdrBase(sink.name)
 {
 }
 
@@ -10,12 +12,12 @@ SoapySdrSink::~SoapySdrSink()
 
 void SoapySdrSink::set_settings(nlohmann::json settings)
 {
-    (void)settings;
+    SoapySdrBase::convert_and_set_settings(settings);
 }
 
 nlohmann::json SoapySdrSink::get_settings()
 {
-    return {};
+    return SoapySdrBase::get_and_convert_settings();
 }
 
 void SoapySdrSink::open()

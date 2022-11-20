@@ -1,8 +1,10 @@
 #pragma once
 
+#include "soapysdr_sdr_base.h"
+
 #include "common/dsp_source_sink/dsp_sample_sink.h"
 
-class SoapySdrSink : public dsp::DSPSampleSink
+class SoapySdrSink : public dsp::DSPSampleSink, public SoapySdrBase
 {
 public:
     SoapySdrSink(dsp::SinkDescriptor sink);

@@ -1,6 +1,8 @@
 #include "soapysdr_sdr_source.h"
 
-SoapySdrSource::SoapySdrSource(dsp::SourceDescriptor source) : DSPSampleSource(source)
+SoapySdrSource::SoapySdrSource(dsp::SourceDescriptor source) :
+    DSPSampleSource(source),
+    SoapySdrBase(source.name)
 {
 }
 
@@ -12,12 +14,12 @@ SoapySdrSource::~SoapySdrSource()
 
 void SoapySdrSource::set_settings(nlohmann::json settings)
 {
-    (void)settings;
+    SoapySdrBase::convert_and_set_settings(settings);
 }
 
 nlohmann::json SoapySdrSource::get_settings()
 {
-    return {};
+    return SoapySdrBase::get_and_convert_settings();
 }
 
 void SoapySdrSource::open()
